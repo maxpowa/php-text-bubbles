@@ -35,7 +35,7 @@
 
     <body>
       <div id="wrapper">
-          <form onsubmit="return false;">
+          <form onsubmit="refreshImage();return false;">
             <table style="margin-bottom:10px;">
                 <tr>
                     <img src="header.png"></img><br />
@@ -69,10 +69,12 @@
       </div>
       
       <script type="text/javascript">
-        $("form").change(function() {
+        function refreshImage() {
            var queryString = $('form').serialize();
            $("#output").attr("src", "/bubble.php?"+queryString); 
-        });
+        }
+      
+        $("form").change(refreshImage);
       </script>
     </body>
 </html> 

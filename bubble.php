@@ -31,7 +31,7 @@ $image_height = count($lines)*(abs($type_space[5] - $type_space[1])+3) + 24;
 $im = imagecreatetruecolor($image_width, $image_height+15);
 imagealphablending($im, true);
 imagesavealpha($im, true);
-imageantialias($im, false);
+//imageantialias($im, false);
 
 $transparent = imagecolorallocatealpha($im, 0, 0, 0, 127);
 imagefill($im, 0, 0, $transparent);

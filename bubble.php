@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: image/png');
 
-$font = 'slkscr.ttf';
+$font = 'fonts/slkscr.ttf';
 $font_size = 12;
 $text = 'No text given';
 $outline = '#000000';

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Sample</title>
+      
+      <script type="text/javascript">
+        function doForm() {
+            document.getElementById("output").src = "/index.php?text="+document.getElementById("inp_text").value;
+        }
+      </script>
+    </head>
+
+    <body bgcolor="#FFFFFF">
+      Image: <img id="output" src="/index.php"></img><br />
+      <form onSubmit="doForm(); return false">
+        <input id="inp_text" type="text" name="text" value="Your text goes here"><br />
+        <input id="inp_outline" type="text" name="outline color" value="#000000"><br />
+        <input id="inp_fill" type="text" name="fill color" value="#FFFFFF"><br />
+        <input id="inp_font_size" type="text" name="font size" value="12"><br />
+        <input id="inp_width" type="text" name="bubble width" value="80"><br />
+        <input type="submit" value="Make a bubble">
+      </form>
+    </body>
+</html> 

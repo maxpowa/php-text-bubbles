@@ -14,7 +14,7 @@ if (isset($_GET['fill'])) $fill = strip_tags( trim( $_GET['fill'] ) );
 if (isset($_GET['font_size'])) $font_size = intval( strip_tags( trim( $_GET['font_size'] ) ) );
 if (isset($_GET['width'])) $max_width = intval( strip_tags( trim( $_GET['width'] ) ) );
 
-$lines = explode("\n", wordwrap ($text, $max_width));
+$lines = explode("\n", wordwrap(strtolower($text), $max_width));
 
 $widest = 0;
 $image_width = 100;
@@ -39,8 +39,9 @@ imagefill($im, 0, 0, $transparent);
 $outline = hexToRGB($outline);
 $fill = hexToRGB($fill);
 
-$outline = imagecolorallocatealpha($im, $outline['r'], $outline['g'], $outline['b'], $outline['a']);
 $shadow = imagecolorallocatealpha($im, $outline['r'], $outline['g'], $outline['b'], 102);
+$outline = imagecolorallocatealpha($im, $outline['r'], $outline['g'], $outline['b'], $outline['a']);
+if ($outline == 0) $outline = 1;
 $fill = imagecolorallocatealpha($im, $fill['r'], $fill['g'], $fill['b'], $fill['a']);
 
 drawBubble($im, $image_width, $image_height, $outline, $shadow, $fill);
@@ -50,9 +51,9 @@ foreach($lines as $line) {
     $dimensions = imagettfbbox($font_size, 0, $font, $line);
     $delta_y =  $delta_y + ($dimensions[1] - $dimensions[7]) + 3;
     //centering x:
-    $x = imagesx($imageCreator) / 2 - ($dimensions[4] - $dimensions[6]) / 2;
+    $x = imagesx($im) / 2 - ($dimensions[4] - $dimensions[6]) / 2;
                // somehow -2 disables AA and is black, so im happy
-    imagettftextSp($im, $font_size, 0, $image_width/2-1+$x, 10+$delta_y, -2, $font, $line);
+    imagettftextSp($im, $font_size, 0, $x-1, 10+$delta_y, -$outline, $font, $line);
 }
 
 imagepng($im);
